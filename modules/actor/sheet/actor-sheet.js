@@ -231,13 +231,13 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     let wounds;
     if (sign === "+" || sign === "-") // Relative
     {
-      let possibleWounds = eval(this.actor.data.data.status.wounds.value + parseInt(value));
-      wounds = possibleWounds > this.actor.data.data.status.wounds.max ? this.actor.data.data.status.wounds.max : possibleWounds;
+      let possibleWounds = eval(this.actor.data.data.status.hp.value + parseInt(value));
+      wounds = possibleWounds > this.actor.data.data.status.hp.max ? this.actor.data.data.status.hp.max : possibleWounds;
     }
     else                            // Absolute
       wounds = parseInt(value);
 
-    this.actor.update({ "data.status.wounds.value": wounds });
+    this.actor.update({ "data.status.hp.value": wounds });
   }
 
     /**
@@ -657,7 +657,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
 
       let skill = this.actor.items.find(s => s.data.name == game.i18n.localize("NAME.Endurance") && s.type == "skill")
       if (skill)
-        this.actor.setupSkill(skill.data, { rest: true, tb: this.actor.data.data.characteristics.t.bonus }).then(setupData => {
+        this.actor.setupSkill(skill.data, { rest: true, tb: this.actor.data.data.characteristics.con.bonus }).then(setupData => {
           this.actor.basicTest(setupData)
         });
       else

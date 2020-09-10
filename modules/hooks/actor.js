@@ -8,7 +8,7 @@ export default function() {
     if (!createData.token)
       mergeObject(createData,
         {
-          "token.bar1": { "attribute": "status.wounds" },                 // Default Bar 1 to Wounds
+          "token.bar1": { "attribute": "status.hp" },                 // Default Bar 1 to Wounds
           "token.bar2": { "attribute": "status.advantage" },               // Default Bar 2 to Advantage
           "token.displayName": CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,    // Default display name to be on owner hover
           "token.displayBars": CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,    // Default display bars to be on owner hover

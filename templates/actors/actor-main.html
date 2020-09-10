@@ -134,68 +134,23 @@
       <span class="top label">{{localize "Wounds"}}<a class = "rest-icon" title="{{localize "RestRecover"}}"><i class="fas fa-bed"></i></a> </span> 
       <div class="wounds-value-box">
         <div id="value">
-          <input class="wounds-value" data-dtype="{{data.status.wounds.type}}" type="text" value="{{data.status.wounds.value}}">
+          <input class="wounds-value" data-dtype="{{data.status.hp.type}}" type="text" value="{{data.status.hp.value}}">
         </div>
         <div id="divisor">
           /
         </div>
         <div id="wounds-max">
           {{#if actor.flags.autoCalcWounds}}
-          <a class="auto-calc-toggle" toggle-type="wounds">{{data.status.wounds.max}}</a>
+          <a class="auto-calc-toggle" toggle-type="wounds">{{data.status.hp.max}}</a>
           {{else}}
-          <input class="auto-calc-toggle" toggle-type="wounds" name="data.status.wounds.max" type="text"
-            value="{{data.status.wounds.max}}" data-dtype="{{data.status.wounds.type}}">
+          <input class="auto-calc-toggle" toggle-type="wounds" name="data.status.hp.max" type="text"
+            value="{{data.status.hp.max}}" data-dtype="{{data.status.hp.type}}">
           {{/if}}
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<div class="main-row second">
-  <div class="criticalWounds row-section">
-    <div class="criticalWounds-section">
-      <span class="top label">{{localize "Critical Wounds"}}</span>
-      <div class="criticalWounds-value-box">
-        <div id="value">
-          <input name="data.status.criticalWounds.value" type="text" value="{{actor.criticalCount}}" readonly>
-        </div>
-        <div id="divisor" class="divisor">
-          /
-        </div>
-        <div id="criticalWounds-max">
-          {{#if actor.flags.autoCalcCritW}}
-          <a class="auto-calc-toggle" toggle-type="critW">{{data.status.criticalWounds.max}}</a>
-          {{else}}
-          <input class="auto-calc-toggle" toggle-type="critW" name="data.status.criticalWounds.max" type="text"
-            value="{{data.status.criticalWounds.max}}">
-          {{/if}}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="corruption row-section">
-    <div class="corruption-section">
-      <span class="top label">{{localize "Corruption"}}</span>
-      <div class="corruption-value-box">
-        <div id="value">
-          <input name="data.status.corruption.value" type="text" value="{{data.status.corruption.value}}">
-        </div>
-        <div id="divisor" class="divisor">
-          /
-        </div>
-        <div id="corruption-max">
-          {{#if actor.flags.autoCalcCorruption}}
-          <a class="auto-calc-toggle" toggle-type="corruption">{{data.status.corruption.max}}</a>
-          {{else}}
-          <input class="auto-calc-toggle" toggle-type="corruption" name="data.status.corruption.max" type="text"
-            value="{{data.status.corruption.max}}">
-          {{/if}}
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="experience row-section">
     <div class="experience-section">
@@ -218,7 +173,7 @@
   </div>
 </div>
 
-<div class="career-list">
+<!-- <div class="career-list">
   <div class="inventory-header item">
     <span id="career">{{localize "Career"}}</span>
     <span id="current">{{localize "Current"}}</span>
@@ -276,4 +231,4 @@
     </li>
     {{/each}}
   </ol>
-</div>
+</div> -->

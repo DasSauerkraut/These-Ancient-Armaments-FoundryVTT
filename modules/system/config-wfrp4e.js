@@ -133,28 +133,28 @@ WFRP4E.statusTiers = {
 WFRP4E.characteristics = {
     "ws": "CHAR.WS",
     "bs": "CHAR.BS",
-    "s": "CHAR.S",
-    "t": "CHAR.T",
+    "s": "CHAR.Str",
+    "t": "CHAR.Con",
     "i": "CHAR.I",
-    "ag": "CHAR.Ag",
+    "ag": "CHAR.Agi",
     "dex": "CHAR.Dex",
     "int": "CHAR.Int",
-    "wp": "CHAR.WP",
-    "fel": "CHAR.Fel"
+    "wp": "CHAR.Will",
+    "fel": "CHAR.Cha"
 };
 
 // Characteristic Abbreviations
 WFRP4E.characteristicsAbbrev = {
     "ws": "CHARAbbrev.WS",
     "bs": "CHARAbbrev.BS",
-    "s": "CHARAbbrev.S",
-    "t": "CHARAbbrev.T",
+    "s": "CHARAbbrev.Str",
+    "t": "CHARAbbrev.Con",
     "i": "CHARAbbrev.I",
-    "ag": "CHARAbbrev.Ag",
+    "ag": "CHARAbbrev.Agi",
     "dex": "CHARAbbrev.Dex",
     "int": "CHARAbbrev.Int",
-    "wp": "CHARAbbrev.WP",
-    "fel": "CHARAbbrev.Fel"
+    "wp": "CHARAbbrev.Will",
+    "fel": "CHARAbbrev.Cha"
 };
 
 WFRP4E.skillTypes = {

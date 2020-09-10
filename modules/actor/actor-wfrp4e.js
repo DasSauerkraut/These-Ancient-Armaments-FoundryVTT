@@ -118,7 +118,7 @@ export default class ActorWfrp4e extends Actor {
    * @see ActorSheetWfrp4e.getData()
    */
   prepareData() {
-    try {
+    // try {
       super.prepareData();
       const data = this.data;
 
@@ -141,72 +141,59 @@ export default class ActorWfrp4e extends Actor {
         data.data.details.experience.current = data.data.details.experience.total - data.data.details.experience.spent;
 
       // Auto calculation values - only calculate if user has not opted to enter ther own values
-      if (data.flags.autoCalcWalk)
-        data.data.details.move.walk = parseInt(data.data.details.move.value) * 2;
-
-      if (data.flags.autoCalcRun)
-        data.data.details.move.run = parseInt(data.data.details.move.value) * 4;
-
       if (data.flags.autoCalcEnc)
-        data.data.status.encumbrance.max = data.data.characteristics.t.bonus + data.data.characteristics.s.bonus;
+        data.data.status.encumbrance.max = data.data.characteristics.str.bonus * 2;
 
-      if (game.settings.get("wfrp4e", "capAdvantageIB"))
-        data.data.status.advantage.max = data.data.characteristics.i.bonus
-      else
-        data.data.status.advantage.max = 10;
+      // if (!hasProperty(this, "data.flags.autoCalcSize"))
+      //   data.flags.autoCalcSize = true;
 
-
-      if (!hasProperty(this, "data.flags.autoCalcSize"))
-        data.flags.autoCalcSize = true;
-
-
-      // Find size based on Traits/Talents
-      let size;
-      let trait = data.items.find(t => t.type == "trait" && t.name.toLowerCase().includes(game.i18n.localize("NAME.Size").toLowerCase()));
-      if (this.data.type == "creature") {
-        trait = data.items.find(t => t.type == "trait" && t.included && t.name.toLowerCase().includes(game.i18n.localize("NAME.Size").toLowerCase()))
-      }
-      if (trait)
-        size = trait.data.specification.value;
-      else {
-        size = data.items.find(x => x.type == "talent" && x.name.toLowerCase() == game.i18n.localize("NAME.Small").toLowerCase());
-        if (size)
-          size = size.name;
-        else
-          size = game.i18n.localize("SPEC.Average")
-      }
+      // // Find size based on Traits/Talents
+      // let size;
+      // let trait = data.items.find(t => t.type == "trait" && t.name.toLowerCase().includes(game.i18n.localize("NAME.Size").toLowerCase()));
+      // if (this.data.type == "creature") {
+      //   trait = data.items.find(t => t.type == "trait" && t.included && t.name.toLowerCase().includes(game.i18n.localize("NAME.Size").toLowerCase()))
+      // }
+      // if (trait)
+      //   size = trait.data.specification.value;
+      // else {
+      //   size = data.items.find(x => x.type == "talent" && x.name.toLowerCase() == game.i18n.localize("NAME.Small").toLowerCase());
+      //   if (size)
+      //     size = size.name;
+      //   else
+      //     size = game.i18n.localize("SPEC.Average")
+      // }
 
       // If the size has been changed since the last known value, update the value 
-      data.data.details.size.value = WFRP_Utility.findKey(size, WFRP4E.actorSizes) || "avg"
+      // data.data.details.size.value = WFRP_Utility.findKey(size, WFRP4E.actorSizes) || "avg"
 
       // Now that we have size, calculate wounds and token size
       if (data.flags.autoCalcWounds) {
         let wounds = this._calculateWounds()
-        if (data.data.status.wounds.max != wounds) // If change detected, reassign max and current wounds
+        if (data.data.status.hp.max != wounds) // If change detected, reassign max and current wounds
         {
-          data.data.status.wounds.max = wounds;
-          data.data.status.wounds.value = wounds;
+          data.data.status.hp.max = wounds;
+          data.data.status.hp.value = wounds;
         }
       }
 
-      if (data.flags.autoCalcSize) {
-        let tokenSize = WFRP4E.tokenSizes[data.data.details.size.value]
-        if (this.isToken) {
-          this.token.update({"height" : tokenSize, "width" : tokenSize });
-        }
-        data.token.height = tokenSize;
-        data.token.width = tokenSize;
-      }
+      // if (data.flags.autoCalcSize) {
+      //   let tokenSize = WFRP4E.tokenSizes[data.data.details.size.value]
+      //   if (this.isToken) {
+      //     this.token.update({"height" : tokenSize, "width" : tokenSize });
+      //   }
+      //   data.token.height = tokenSize;
+      //   data.token.width = tokenSize;
+      // }
 
 
 
 
       // Auto calculation flags - if the user hasn't disabled various autocalculated values, calculate them
-      if (data.flags.autoCalcRun) {
-        // This is specifically for the Stride trait
-        if (data.items.find(t => t.type == "trait" && t.name.toLowerCase() == game.i18n.localize("NAME.Stride").toLowerCase()))
-          data.data.details.move.run += data.data.details.move.walk;
-      }
+      // if (data.flags.autoCalcRun) {
+      //   // This is specifically for the Stride trait
+      //   if (data.items.find(t => t.type == "trait" && t.name.toLowerCase() == game.i18n.localize("NAME.Stride").toLowerCase()))
+      //     data.data.details.move.run += data.data.details.move.walk;
+      // }
 
       let talents = data.items.filter(t => t.type == "talent")
       // talentTests is used to easily reference talent bonuses (e.g. in setupTest function and dialog)
@@ -245,11 +232,11 @@ export default class ActorWfrp4e extends Actor {
       let ambi = talents.filter(t => t.name.toLowerCase() == game.i18n.localize("NAME.Ambi").toLowerCase()).reduce((advances, talent) => advances + talent.data.advances.value, 0)
       data.flags.ambi = ambi;
 
-    }
-    catch (error) {
-      console.error("Something went wrong with preparing actor data: " + error)
-      ui.notifications.error(game.i18n.localize("ACTOR.PreparationError") + error)
-    }
+    // }
+    // catch (error) {
+    //   console.error("Something went wrong with preparing actor data: " + error)
+    //   ui.notifications.error(game.i18n.localize("ACTOR.PreparationError") + error)
+    // }
   }
 
   /**
@@ -267,16 +254,10 @@ export default class ActorWfrp4e extends Actor {
     if (this.data.type != "character")
       return;
 
-    let tb = this.data.data.characteristics.t.bonus;
-    let wpb = this.data.data.characteristics.wp.bonus;
+    let conb = this.data.data.characteristics.con.bonus;
+    let wpb = this.data.data.characteristics.will.bonus;
 
     // If the user has not opted out of auto calculation of corruption, add pure soul value
-    if (this.data.flags.autoCalcCorruption) {
-      this.data.data.status.corruption.max = tb + wpb;
-      let pureSoulTalent = this.data.items.find(x => x.type == "talent" && x.name.toLowerCase() == (game.i18n.localize("NAME.PS")).toLowerCase())
-      if (pureSoulTalent)
-        this.data.data.status.corruption.max += pureSoulTalent.data.advances.value;
-    }
   }
 
 
@@ -850,7 +831,7 @@ export default class ActorWfrp4e extends Actor {
     let title = game.i18n.localize("ChannellingTest") + " - " + spell.name;
 
     // channellSkills array holds the available skills/characteristics to  with - Channelling: Willpower
-    let channellSkills = [{ key: "wp", name: game.i18n.localize("CHAR.WP") }]
+    let channellSkills = [{ key: "wp", name: game.i18n.localize("CHAR.Will") }]
 
     // if the actor has any channel skills, add them to the array.
     channellSkills = channellSkills.concat(this.items.filter(i => i.name.toLowerCase().includes(game.i18n.localize("NAME.Channelling").toLowerCase()) && i.type == "skill"))
@@ -925,7 +906,7 @@ export default class ActorWfrp4e extends Actor {
             testData.extra.channellSkill = skillSelected.data
         }
         else // if the ccharacteristic was selected, use just the characteristic
-          testData.target = testData.testModifier + testData.testDifficulty + this.data.data.characteristics.wp.value
+          testData.target = testData.testModifier + testData.testDifficulty + this.data.data.characteristics.will.value
 
         let talentBonuses = html.find('[name = "talentBonuses"]').val();
         // Combine all Talent Bonus values (their times taken) into one sum
@@ -963,7 +944,7 @@ export default class ActorWfrp4e extends Actor {
     let title = game.i18n.localize("PrayerTest") + " - " + prayer.name;
 
     // ppraySkills array holds the available skills/characteristics to pray with - Prayers: Fellowship
-    let praySkills = [{ key: "fel", name: game.i18n.localize("CHAR.Fel") }]
+    let praySkills = [{ key: "fel", name: game.i18n.localize("CHAR.Cha") }]
 
     // if the actor has the Pray skill, add it to the array.
     praySkills = praySkills.concat(this.items.filter(i => i.name.toLowerCase() == game.i18n.localize("NAME.Pray").toLowerCase() && i.type == "skill"));
@@ -976,7 +957,7 @@ export default class ActorWfrp4e extends Actor {
     let testData = { // Store this data to be used in the test logic
       target: 0,
       hitLocation: false,
-      target: defaultSelection != -1 ? this.data.data.characteristics[praySkills[defaultSelection].data.data.characteristic.value].value + praySkills[defaultSelection].data.data.advances.value : this.data.data.characteristics.fel.value,
+      target: defaultSelection != -1 ? this.data.data.characteristics[praySkills[defaultSelection].data.data.characteristic.value].value + praySkills[defaultSelection].data.data.advances.value : this.data.data.characteristics.cha.value,
       extra: {
         prayer: preparedPrayer,
         size: this.data.data.details.size.value,
@@ -1024,7 +1005,7 @@ export default class ActorWfrp4e extends Actor {
         }
         else // if a characteristic was selected, use just the characteristic
         {
-          testData.target = this.data.data.characteristics.fel.value
+          testData.target = this.data.data.characteristics.cha.value
             + testData.testDifficulty
             + testData.testModifier;
         }
@@ -2804,14 +2785,14 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
 
 
     // Easy to reference bonuses
-    let sb = this.data.data.characteristics.s.bonus;
-    let tb = this.data.data.characteristics.t.bonus;
-    let wpb = this.data.data.characteristics.wp.bonus;
+    let sb = this.data.data.characteristics.str.bonus;
+    let tb = this.data.data.characteristics.con.bonus;
+    let wpb = this.data.data.characteristics.will.bonus;
 
-    if (this.data.flags.autoCalcCritW)
-      this.data.data.status.criticalWounds.max = tb;
+    // if (this.data.flags.autoCalcCritW)
+    //   this.data.data.status.criticalWounds.max = tb;
 
-    let wounds = this.data.data.status.wounds.max;
+    let wounds = this.data.data.status.hp.max;
 
     if (this.data.flags.autoCalcWounds) {
       // Construct trait means you use SB instead of WPB 
@@ -2883,7 +2864,7 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
 
     // Start wound loss at the damage value
     let totalWoundLoss = opposeData.damage.value
-    let newWounds = actor.data.data.status.wounds.value;
+    let newWounds = actor.data.data.status.hp.value;
     let applyAP = (damageType == WFRP4E.DAMAGE_TYPE.IGNORE_TB || damageType == WFRP4E.DAMAGE_TYPE.NORMAL)
     let applyTB = (damageType == WFRP4E.DAMAGE_TYPE.IGNORE_AP || damageType == WFRP4E.DAMAGE_TYPE.NORMAL)
     let AP = {};
@@ -2910,8 +2891,8 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
 
     // Reduce damage by TB
     if (applyTB) {
-      totalWoundLoss -= actor.data.data.characteristics.t.bonus
-      updateMsg += actor.data.data.characteristics.t.bonus + " TB"
+      totalWoundLoss -= actor.data.data.characteristics.con.bonus
+      updateMsg += actor.data.data.characteristics.con.bonus + " TB"
     }
 
     // If the actor has the Robust talent, reduce damage by times taken
@@ -3034,11 +3015,11 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
     if (newWounds <= 0 && !impenetrable) {
       //WFRP_Audio.PlayContextAudio(opposeData.attackerTestResult.weapon, {"type": "hit", "equip": "crit"})
       let critAmnt = game.settings.get("wfrp4e", "dangerousCritsMod")
-      if (game.settings.get("wfrp4e", "dangerousCrits") && critAmnt && (Math.abs(newWounds) - actor.data.data.characteristics.t.bonus) > 0) {
-        let critModifier = (Math.abs(newWounds) - actor.data.data.characteristics.t.bonus) * critAmnt;
+      if (game.settings.get("wfrp4e", "dangerousCrits") && critAmnt && (Math.abs(newWounds) - actor.data.data.characteristics.con.bonus) > 0) {
+        let critModifier = (Math.abs(newWounds) - actor.data.data.characteristics.con.bonus) * critAmnt;
         updateMsg += `<br><a class ="table-click critical-roll" data-modifier=${critModifier} data-table = "crit${opposeData.hitloc.value}" ><i class='fas fa-list'></i> ${game.i18n.localize("Critical")} +${critModifier}</a>`
       }
-      else if (Math.abs(newWounds) < actor.data.data.characteristics.t.bonus)
+      else if (Math.abs(newWounds) < actor.data.data.characteristics.con.bonus)
         updateMsg += `<br><a class ="table-click critical-roll" data-modifier="-20" data-table = "crit${opposeData.hitloc.value}" ><i class='fas fa-list'></i> ${game.i18n.localize("Critical")} (-20)</a>`
       else
         updateMsg += `<br><a class ="table-click critical-roll" data-table = "crit${opposeData.hitloc.value}" ><i class='fas fa-list'></i> ${game.i18n.localize("Critical")}</a>`
@@ -3057,7 +3038,7 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
     updateMsg = updateMsg.replace("@TOTAL", totalWoundLoss)
 
     // Update actor wound value
-    actor.update({ "data.status.wounds.value": newWounds })
+    actor.update({ "data.status.hp.value": newWounds })
     return updateMsg;
   }
 
@@ -3511,7 +3492,7 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
     let failed = testResult.target < testResult.roll;
 
     if (failed) {
-      let wpb = this.data.data.characteristics.wp.bonus;
+      let wpb = this.data.data.characteristics.will.bonus;
       let tableText = "Roll on a Corruption Table:<br>" + WFRP4E.corruptionTables.map(t => `@Table[${t}]<br>`).join("")
       ChatMessage.create(WFRP_Utility.chatDataSetup(`
       <h3>Dissolution of Body and Mind</h3> 

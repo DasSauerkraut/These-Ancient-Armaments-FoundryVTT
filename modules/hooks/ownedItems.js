@@ -39,10 +39,10 @@ export default function() {
         let newWounds;
         if (item.data.wounds.value.toLowerCase() == "death")
           newWounds = 0;
-        newWounds = actor.data.data.status.wounds.value - Number(item.data.wounds.value)
+        newWounds = actor.data.data.status.hp.value - Number(item.data.wounds.value)
         if (newWounds < 0) newWounds = 0;
 
-        actor.update({ "data.status.wounds.value": newWounds });
+        actor.update({ "data.status.hp.value": newWounds });
 
         ui.notifications.notify(`${item.data.wounds.value} ${game.i18n.localize("CHAT.CriticalWoundsApplied")} ${actor.name}`)
       }

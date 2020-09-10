@@ -1,12 +1,12 @@
 {
-  "name": "wfrp4e",
-  "title": "Warhammer Fantasy Roleplay 4th Edition",
+  "name": "taa",
+  "title": "These Ancient Armaments",
   "description": "A comprehensive system for running grim and perilious games of Warhammer Fantasy Role-play in the Foundry VTT environment.",
-  "version": "2.2.0",
-  "author": "CatoThe1stElder, Moo Man",
-  "esmodules" : ["wfrp4e.js"],
+  "version": "0.0.1",
+  "author": "DasSauerkraut, CatoThe1stElder, Moo Man",
+  "esmodules" : ["taa.js"],
   "scripts": ["./libs/pixi-filters.js"],
-  "styles": ["./css/wfrp4e.css"],
+  "styles": ["./css/taa.css"],
   "packs": [],
   "languages": [
     {
@@ -16,15 +16,15 @@
     }
   ],
   "initiative": "@characteristics.i.value + @characteristics.ag.value/100",
-  "gridDistance": 2,
+  "gridDistance": 1,
   "gridUnits": "yd",
-  "primaryTokenAttribute": "status.wounds",
+  "primaryTokenAttribute": "status.hp",
   "secondaryTokenAttribute": "status.advantage",
   "minimumCoreVersion": "0.6.6",
   "compatibleCoreVersion": "0.6.6",
   "templateVersion":2,
   "socket": true,
-  "manifest" :  "https://raw.githubusercontent.com/moo-man/WFRP4e-FoundryVTT/master/system.json",
-  "download" :  "https://github.com/moo-man/WFRP4e-FoundryVTT/archive/2.1.0.zip",
-  "url" : "https://github.com/moo-man/WFRP4e-FoundryVTT"
+  "manifest" :  "",
+  "download" :  "",
+  "url" : ""
 }
