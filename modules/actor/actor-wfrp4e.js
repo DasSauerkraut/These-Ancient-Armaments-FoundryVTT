@@ -166,12 +166,12 @@ export default class ActorWfrp4e extends Actor {
 
       // Now that we have size, calculate wounds and token size
       if (data.flags.autoCalcWounds) {
-        let wounds = this._calculateWounds()
+        let hp = this._calculateHP()
         this._calculateBloodied()
-        if (data.data.status.hp.max != wounds) // If change detected, reassign max and current wounds
+        if (data.data.status.hp.max != hp) // If change detected, reassign max and current hp
         {
-          data.data.status.hp.max = wounds;
-          data.data.status.hp.value = wounds;
+          data.data.status.hp.max = hp;
+          data.data.status.hp.value = hp;
         }
       }
 
@@ -2758,7 +2758,7 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
  * 
  * @returns {Number} Max wound value calculated
  */
-  _calculateWounds() {
+  _calculateHP() {
     let hardies = this.data.items.filter(t => (t.type == "trait" || t.type == "talent") && t.name.toLowerCase().includes(game.i18n.localize("NAME.Hardy").toLowerCase()))
     let traits = this.data.items.filter(t => t.type == "trait")
 
@@ -2786,7 +2786,6 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
     if (swarmTrait)
       wounds *= 5;
 
-
     return wounds
   }
 
@@ -2794,7 +2793,7 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
     let conb = this.data.data.characteristics.con.bonus;
     console.log(this.data.data.status)
     this.data.data.status.bloodied.value = conb*2;
-  }
+  }z
 
   /**
    * Apply damage to an actor, taking into account armor, size, and weapons.

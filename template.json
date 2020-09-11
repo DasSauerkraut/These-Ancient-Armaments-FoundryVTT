@@ -91,6 +91,23 @@
             "label": "Bloodied",
             "value": 0
           },
+          "absorption": {
+            "base": {
+              "type": "Number",
+              "label": "Base",
+              "value": 0
+            },
+            "armor": {
+              "type": "Number",
+              "label": "Armor",
+              "value": 1
+            },
+            "total": {
+              "type": "Number",
+              "label": "Total",
+              "value": 0
+            }
+          },
           "penalties": {
             "type": "String",
             "label": "Penalties",

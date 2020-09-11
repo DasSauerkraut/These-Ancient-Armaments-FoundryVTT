@@ -24,8 +24,13 @@
 
   <section class="general" ondragstart="return false;" ondrop="return false;">
     <img class="charimg profile" src="{{actor.img}}" title="{{actor.name}}" height="95" width="95" data-edit="img">
-
-    <div class="items">
+    <div>
+      Absorption: 
+      <div>
+        Base: {{data.status.absorption.base.value}} + Armor: {{data.status.absorption.armor.value}} = {{data.status.absorption.total.value}}
+      </div>
+    </div>
+    <!-- <div class="items">
       <div class="row">
         <div id="field-class" class="item">
           <input class="input-details" style="box-shadow: none !important;" type="text" value="{{actor.currentClass}}"
@@ -83,7 +88,7 @@
             value="{{data.details.starsign.value}}" placeholder="{{localize 'Star Sign'}}" />
           <span class="label-details">{{localize "Star Sign"}}</span>
         </div>
-      </div>
+      </div> -->
 
 
   </section>
