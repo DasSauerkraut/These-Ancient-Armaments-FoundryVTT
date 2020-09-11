@@ -57,7 +57,7 @@ export default class ItemSheetWfrp4e extends ItemSheet {
    */
   get template() {
     let type = this.item.type;
-    return `systems/wfrp4e/templates/items/item-${type}-sheet.html`;
+    return `systems/taa/templates/items/item-${type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -155,7 +155,7 @@ export default class ItemSheetWfrp4e extends ItemSheet {
       data['mutationTypes'] = WFRP4E.mutationTypes;
     }
 
-    data.showBorder = data.item.img == "systems/wfrp4e/icons/blank.png" || !data.item.img
+    data.showBorder = data.item.img == "systems/taa/icons/blank.png" || !data.item.img
     data.isGM = game.user.isGM;
     data.isOwned = this.item.isOwned;
     return data;

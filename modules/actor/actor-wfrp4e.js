@@ -52,8 +52,6 @@ export default class ActorWfrp4e extends Actor {
       autoCalcRun: true,
       autoCalcWalk: true,
       autoCalcWounds: true,
-      autoCalcCritW: true,
-      autoCalcCorruption: true,
       autoCalcEnc: true,
       autoCalcSize: true,
     }
@@ -169,6 +167,7 @@ export default class ActorWfrp4e extends Actor {
       // Now that we have size, calculate wounds and token size
       if (data.flags.autoCalcWounds) {
         let wounds = this._calculateWounds()
+        this._calculateBloodied()
         if (data.data.status.hp.max != wounds) // If change detected, reassign max and current wounds
         {
           data.data.status.hp.max = wounds;
@@ -330,21 +329,16 @@ export default class ActorWfrp4e extends Actor {
     };
 
     if (options.rest)
-      testData.extra.options["tb"] = char.bonus;
-
-    // Default a WS or BS test to have hit location checked
-    if (characteristicId == "ws" || characteristicId == "bs")
-      testData.hitLocation = true;
+      testData.extra.options["con"] = char.bonus;
 
     // Setup dialog data: title, template, buttons, prefilled data
     let dialogOptions = {
       title: title,
-      template: "/systems/wfrp4e/templates/dialog/characteristic-dialog.html",
+      template: "/systems/taa/templates/dialog/characteristic-dialog.html",
       // Prefilled dialog data
       data: {
         hitLocation: testData.hitLocation,
         talents: this.data.flags.talentTests,
-        advantage: this.data.data.status.advantage.value || 0,
         rollMode: options.rollMode
       },
       callback: (html) => {
@@ -368,23 +362,12 @@ export default class ActorWfrp4e extends Actor {
       }
     };
 
-    if (options.corruption) {
-      title = `Corrupting Influence - ${game.i18n.localize(char.label)} Test`
-      dialogOptions.title = title;
-      dialogOptions.data.testDifficulty = "challenging"
-    }
-    if (options.mutate) {
-      title = `Dissolution of Body and Mind - ${game.i18n.localize(char.label)} Test`
-      dialogOptions.title = title;
-      dialogOptions.data.testDifficulty = "challenging"
-    }
-
     if (options.rest) {
       dialogOptions.data.testDifficulty = "average"
     }
 
     // Call the universal cardOptions helper
-    let cardOptions = this._setupCardOptions("systems/wfrp4e/templates/chat/roll/characteristic-card.html", title)
+    let cardOptions = this._setupCardOptions("systems/taa/templates/chat/roll/characteristic-card.html", title)
 
     // Provide these 3 objects to setupDialog() to create the dialog and assign the roll function
     return DiceWFRP.setupDialog({
@@ -429,7 +412,7 @@ export default class ActorWfrp4e extends Actor {
     // Setup dialog data: title, template, buttons, prefilled data   
     let dialogOptions = {
       title: title,
-      template: "/systems/wfrp4e/templates/dialog/skill-dialog.html",
+      template: "/systems/taa/templates/dialog/skill-dialog.html",
       // Prefilled dialog data
 
       data: {
@@ -488,7 +471,7 @@ export default class ActorWfrp4e extends Actor {
     if (options.rest) { dialogOptions.data.testDifficulty = "average"; }
 
     // Call the universal cardOptions helper
-    let cardOptions = this._setupCardOptions("systems/wfrp4e/templates/chat/roll/skill-card.html", title)
+    let cardOptions = this._setupCardOptions("systems/taa/templates/chat/roll/skill-card.html", title)
     if (options.corruption)
       cardOptions.rollMode = "gmroll"
 
@@ -542,14 +525,14 @@ export default class ActorWfrp4e extends Actor {
         // Check to see if they have ammo if appropriate
         testData.extra.ammo = duplicate(this.getEmbeddedEntity("OwnedItem", weapon.data.currentAmmo.value))
         if (!testData.extra.ammo || weapon.data.currentAmmo.value == 0 || testData.extra.ammo.data.quantity.value == 0) {
-          AudioHelper.play({ src: "systems/wfrp4e/sounds/no.wav" }, false)
+          AudioHelper.play({ src: "systems/taa/sounds/no.wav" }, false)
           ui.notifications.error(game.i18n.localize("Error.NoAmmo"))
           return
         }
       }
       else if (weapon.data.weaponGroup.value != "entangling" && weapon.data.quantity.value == 0) {
         // If this executes, it means it uses its own quantity for ammo (e.g. throwing), which it has none of
-        AudioHelper.play({ src: "systems/wfrp4e/sounds/no.wav" }, false)
+        AudioHelper.play({ src: "systems/taa/sounds/no.wav" }, false)
         ui.notifications.error(game.i18n.localize("Error.NoAmmo"))
         return;
       }
@@ -634,7 +617,7 @@ export default class ActorWfrp4e extends Actor {
     // Setup dialog data: title, template, buttons, prefilled data
     let dialogOptions = {
       title: title,
-      template: "/systems/wfrp4e/templates/dialog/weapon-dialog.html",
+      template: "/systems/taa/templates/dialog/weapon-dialog.html",
       // Prefilled dialog data
       data: {
         hitLocation: testData.hitLocation,
@@ -696,7 +679,7 @@ export default class ActorWfrp4e extends Actor {
     };
 
     // Call the universal cardOptions helper
-    let cardOptions = this._setupCardOptions("systems/wfrp4e/templates/chat/roll/weapon-card.html", title)
+    let cardOptions = this._setupCardOptions("systems/taa/templates/chat/roll/weapon-card.html", title)
 
     // Provide these 3 objects to setupDialog() to create the dialog and assign the roll function
     return DiceWFRP.setupDialog({
@@ -754,7 +737,7 @@ export default class ActorWfrp4e extends Actor {
     // Setup dialog data: title, template, buttons, prefilled data
     let dialogOptions = {
       title: title,
-      template: "/systems/wfrp4e/templates/dialog/spell-dialog.html",
+      template: "/systems/taa/templates/dialog/spell-dialog.html",
       // Prefilled dialog data
       data: {
         hitLocation: testData.hitLocation,
@@ -806,7 +789,7 @@ export default class ActorWfrp4e extends Actor {
     };
 
     // Call the universal cardOptions helper
-    let cardOptions = this._setupCardOptions("systems/wfrp4e/templates/chat/roll/spell-card.html", title)
+    let cardOptions = this._setupCardOptions("systems/taa/templates/chat/roll/spell-card.html", title)
 
     // Provide these 3 objects to setupDialog() to create the dialog and assign the roll function
     return DiceWFRP.setupDialog({
@@ -875,7 +858,7 @@ export default class ActorWfrp4e extends Actor {
     // Setup dialog data: title, template, buttons, prefilled data
     let dialogOptions = {
       title: title,
-      template: "/systems/wfrp4e/templates/dialog/channel-dialog.html",
+      template: "/systems/taa/templates/dialog/channel-dialog.html",
       // Prefilled dialog data
       data: {
         malignantInfluence: testData.malignantInfluence,
@@ -920,7 +903,7 @@ export default class ActorWfrp4e extends Actor {
     };
 
     // Call the universal cardOptions helper
-    let cardOptions = this._setupCardOptions("systems/wfrp4e/templates/chat/roll/channel-card.html", title)
+    let cardOptions = this._setupCardOptions("systems/taa/templates/chat/roll/channel-card.html", title)
 
     // Provide these 3 objects to setupDialog() to create the dialog and assign the roll function
     return DiceWFRP.setupDialog({
@@ -976,7 +959,7 @@ export default class ActorWfrp4e extends Actor {
     // Setup dialog data: title, template, buttons, prefilled data
     let dialogOptions = {
       title: title,
-      template: "/systems/wfrp4e/templates/dialog/prayer-dialog.html",
+      template: "/systems/taa/templates/dialog/prayer-dialog.html",
       // Prefilled dialog data
       data: {
         hitLocation: testData.hitLocation,
@@ -1023,7 +1006,7 @@ export default class ActorWfrp4e extends Actor {
     };
 
     // Call the universal cardOptions helper
-    let cardOptions = this._setupCardOptions("systems/wfrp4e/templates/chat/roll/prayer-card.html", title)
+    let cardOptions = this._setupCardOptions("systems/taa/templates/chat/roll/prayer-card.html", title)
 
     // Provide these 3 objects to setupDialog() to create the dialog and assign the roll function
     return DiceWFRP.setupDialog({
@@ -1067,7 +1050,7 @@ export default class ActorWfrp4e extends Actor {
     // Setup dialog data: title, template, buttons, prefilled data
     let dialogOptions = {
       title: title,
-      template: "/systems/wfrp4e/templates/dialog/skill-dialog.html", // Reuse skill dialog
+      template: "/systems/taa/templates/dialog/skill-dialog.html", // Reuse skill dialog
       // Prefilled dialog data
       data: {
         hitLocation: testData.hitLocation,
@@ -1103,7 +1086,7 @@ export default class ActorWfrp4e extends Actor {
     };
 
     // Call the universal cardOptions helper
-    let cardOptions = this._setupCardOptions("systems/wfrp4e/templates/chat/roll/skill-card.html", title)
+    let cardOptions = this._setupCardOptions("systems/taa/templates/chat/roll/skill-card.html", title)
 
     // Provide these 3 objects to setupDialog() to create the dialog and assign the roll function
     return DiceWFRP.setupDialog({
@@ -2785,49 +2768,18 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
 
 
     // Easy to reference bonuses
-    let sb = this.data.data.characteristics.str.bonus;
-    let tb = this.data.data.characteristics.con.bonus;
+    let strb = this.data.data.characteristics.str.bonus;
+    let conb = this.data.data.characteristics.con.bonus;
     let wpb = this.data.data.characteristics.will.bonus;
-
-    // if (this.data.flags.autoCalcCritW)
-    //   this.data.data.status.criticalWounds.max = tb;
 
     let wounds = this.data.data.status.hp.max;
 
     if (this.data.flags.autoCalcWounds) {
       // Construct trait means you use SB instead of WPB 
       if (traits.find(t => t.name.toLowerCase().includes(game.i18n.localize("NAME.Construct").toLowerCase()) || traits.find(t => t.name.toLowerCase().includes(game.i18n.localize("NAME.Mindless").toLowerCase()))))
-        wpb = sb;
-      switch (this.data.data.details.size.value) // Use the size to get the correct formula (size determined in prepare())
-      {
-        case "tiny":
-          wounds = 1 + tb * tbMultiplier;
-          break;
+        wpb = strb;
 
-        case "ltl":
-          wounds = tb + tb * tbMultiplier;
-          break;
-
-        case "sml":
-          wounds = 2 * tb + wpb + tb * tbMultiplier;
-          break;
-
-        case "avg":
-          wounds = sb + 2 * tb + wpb + tb * tbMultiplier;
-          break;
-
-        case "lrg":
-          wounds = 2 * (sb + 2 * tb + wpb + tb * tbMultiplier);
-          break;
-
-        case "enor":
-          wounds = 4 * (sb + 2 * tb + wpb + tb * tbMultiplier);
-          break;
-
-        case "mnst":
-          wounds = 8 * (sb + 2 * tb + wpb + tb * tbMultiplier);
-          break;
-      }
+      wounds = conb*5 + strb*2 + wpb;
     }
 
     let swarmTrait = traits.find(t => t.name.toLowerCase().includes(game.i18n.localize("NAME.Swarm").toLowerCase()))
@@ -2836,6 +2788,12 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
 
 
     return wounds
+  }
+
+  _calculateBloodied() {
+    let conb = this.data.data.characteristics.con.bonus;
+    console.log(this.data.data.status)
+    this.data.data.status.bloodied.value = conb*2;
   }
 
   /**
@@ -3401,110 +3359,6 @@ DiceWFRP.renderRollCard() as well as handleOpposedTarget().
     if (data.unopposedStartMessage)
       cardOptions.unopposedStartMessage = data.unopposedStartMessage;
     return cardOptions;
-  }
-
-
-  async corruptionDialog(strength) {
-    new Dialog({
-      title: "Corrupting Influence",
-      content: `<p>How does ${this.name} resist this corruption?`,
-      buttons: {
-        endurance: {
-          label: game.i18n.localize("NAME.Endurance"),
-          callback: () => {
-            let skill = this.items.find(i => i.name == game.i18n.localize("NAME.Endurance") && i.type == "skill")
-            if (skill) {
-              this.setupSkill(skill.data, { corruption: strength }).then(setupData => this.basicTest(setupData))
-            }
-            else {
-              this.setupCharacteristic("t", { corruption: strength }).then(setupData => this.basicTest(setupData))
-            }
-          }
-        },
-        cool: {
-          label: game.i18n.localize("NAME.Cool"),
-          callback: () => {
-            let skill = this.items.find(i => i.name == game.i18n.localize("NAME.Cool") && i.type == "skill")
-            if (skill) {
-              this.setupSkill(skill.data, { corruption: strength }).then(setupData => this.basicTest(setupData))
-            }
-            else {
-              this.setupCharacteristic("wp", { corruption: strength }).then(setupData => this.basicTest(setupData))
-            }
-          }
-        }
-
-      }
-    }).render(true)
-  }
-
-  async handleCorruptionResult(testResult) {
-    let strength = testResult.options.corruption;
-    let failed = testResult.target < testResult.roll;
-    let corruption = 0 // Corruption GAINED
-    switch (strength) {
-      case "minor":
-        if (failed)
-          corruption++;
-        break;
-
-      case "moderate":
-        if (failed)
-          corruption += 2
-        else if (testResult.SL < 2)
-          corruption += 1
-        break;
-
-      case "major":
-        if (failed)
-          corruption += 3
-        else if (testResult.SL < 2)
-          corruption += 2
-        else if (testResult.SL < 4)
-          corruption += 1
-        break;
-    }
-    let newCorruption = Number(this.data.data.status.corruption.value) + corruption
-    ChatMessage.create(WFRP_Utility.chatDataSetup(`<b>${this.name}</b> gains ${corruption} Corruption.`, "gmroll", false))
-    await this.update({ "data.status.corruption.value": newCorruption })
-    if (corruption > 0)
-      this.checkCorruption();
-
-  }
-
-  async checkCorruption() {
-    if (this.data.data.status.corruption.value > this.data.data.status.corruption.max) {
-      let skill = this.items.find(i => i.name == game.i18n.localize("NAME.Endurance") && i.type == "skill")
-      if (skill) {
-        this.setupSkill(skill.data, { mutate: true }).then(setupData => {
-          this.basicTest(setupData)
-        });
-      }
-      else {
-        this.setupCharacteristic("t", { mutate: true }).then(setupData => {
-          this.basicTest(setupData)
-        });
-      }
-    }
-  }
-
-  async handleMutationResult(testResult) {
-    let failed = testResult.target < testResult.roll;
-
-    if (failed) {
-      let wpb = this.data.data.characteristics.will.bonus;
-      let tableText = "Roll on a Corruption Table:<br>" + WFRP4E.corruptionTables.map(t => `@Table[${t}]<br>`).join("")
-      ChatMessage.create(WFRP_Utility.chatDataSetup(`
-      <h3>Dissolution of Body and Mind</h3> 
-      <p>As corruption ravages your soul, the warping breath of Chaos whispers within, either fanning your flesh into a fresh, new form, or fracturing your psyche with exquisite knowledge it can never unlearn.</p>
-      <p><b>${this.name}</b> loses ${wpb} Corruption.
-      <p>${tableText}</p>`,
-        "gmroll", false))
-      this.update({ "data.status.corruption.value": Number(this.data.data.status.corruption.value) - wpb })
-    }
-    else
-      ChatMessage.create(WFRP_Utility.chatDataSetup(`You have managed to hold off your corruption. For now.`, "gmroll", false))
-
   }
 
   

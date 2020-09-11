@@ -462,7 +462,7 @@ export default class OpposedWFRP {
     // If targeting, Create a new result message
     if (options.target) {
       formattedOpposeResult.hideData = true;
-      renderTemplate("systems/wfrp4e/templates/chat/roll/opposed-result.html", formattedOpposeResult).then(html => {
+      renderTemplate("systems/taa/templates/chat/roll/opposed-result.html", formattedOpposeResult).then(html => {
         let chatOptions = {
           user: game.user._id,
           content: html,
@@ -477,7 +477,7 @@ export default class OpposedWFRP {
     else // If manual - update start message and clear opposed data
     {
       formattedOpposeResult.hideData = true;
-      renderTemplate("systems/wfrp4e/templates/chat/roll/opposed-result.html", formattedOpposeResult).then(html => {
+      renderTemplate("systems/taa/templates/chat/roll/opposed-result.html", formattedOpposeResult).then(html => {
         let chatOptions = {
           user: game.user._id,
           content: html,

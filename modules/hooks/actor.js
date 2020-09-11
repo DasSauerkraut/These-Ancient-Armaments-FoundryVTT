@@ -9,7 +9,7 @@ export default function() {
       mergeObject(createData,
         {
           "token.bar1": { "attribute": "status.hp" },                 // Default Bar 1 to Wounds
-          "token.bar2": { "attribute": "status.advantage" },               // Default Bar 2 to Advantage
+          "token.bar2": { "attribute": "status.thp" },               // Default Bar 2 to Advantage
           "token.displayName": CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,    // Default display name to be on owner hover
           "token.displayBars": CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,    // Default display bars to be on owner hover
           "token.disposition": CONST.TOKEN_DISPOSITIONS.NEUTRAL,         // Default disposition to neutral
@@ -18,7 +18,7 @@ export default function() {
 
     // Set custom default token
     if (!createData.img)
-      createData.img = "systems/wfrp4e/tokens/unknown.png"
+      createData.img = "systems/taa/tokens/unknown.png"
 
     // Default characters to HasVision = true and Link Data = true
     if (createData.type == "character") {
@@ -31,7 +31,7 @@ export default function() {
   // Treat the custom default token as a true default token
   // If you change the actor image from the default token, it will automatically set the same image to be the token image
   Hooks.on("preUpdateActor", (data, updatedData) => {
-    if (data.data.token.img == "systems/wfrp4e/tokens/unknown.png" && updatedData.img) {
+    if (data.data.token.img == "systems/taa/tokens/unknown.png" && updatedData.img) {
       updatedData["token.img"] = updatedData.img;
       data.data.token.img = updatedData.img;
     }

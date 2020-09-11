@@ -3998,7 +3998,7 @@
       width: 51px;
       margin: 0px 0px 0px 0px;
       border: 1px solid #736953a6;
-      flex-grow: 1;
+      flex-grow: 0.5;
       /* background: var(--debug-background-color-red); */
     }
     .app.window-app.sheet.wfrp4e.actor.character-sheet .tab.main.active .main-row .movement.row-section .move-section {
@@ -4073,7 +4073,7 @@
       width: 60px;
       margin: 0px 0px 0px 6px;
       border: 1px solid #736953a6;
-      flex-grow: 1;
+      flex-grow: 0.5;
       /* background: var(--debug-background-color-red); */
     }
     .app.window-app.sheet.wfrp4e.actor.character-sheet .tab.main.active .main-row .fate-resilience.row-section .fate-resilience-section {
@@ -4169,7 +4169,7 @@
       width: 60px;
       margin: 0px 0px 0px 6px;
       border: 1px solid #736953a6;
-      flex-grow: 0;
+      flex-grow: 1;
       flex-basis: 85px;
       /* background: var(--debug-background-color-red); */
     }
@@ -4255,6 +4255,15 @@
           .app.window-app.sheet.wfrp4e.actor.character-sheet .tab.main.active .main-row .wounds.row-section .wounds-value-box #wounds-max > input {
             width: 100%;
             height: 22px;
+            padding: 5px 0px 0px 0px;
+          }
+
+          .app.window-app.sheet.wfrp4e.actor.character-sheet .tab.main.active .main-row .wounds.row-section .wounds-value-box #bloodied {
+            width: 100%;
+            min-width: 39px;
+            height: 100%;
+            flex-grow: 1;
+            /* background: red; */
             padding: 5px 0px 0px 0px;
           }
 

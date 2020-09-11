@@ -101,7 +101,7 @@ export default class BrowserWfrp4e extends Application {
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.id = "wfrp4e-browser";
-    options.template = "systems/wfrp4e/templates/browser/browser.html"
+    options.template = "systems/taa/templates/browser/browser.html"
     options.classes.push("wfrp4e", "wfrp-browser");
     options.resizable = true;
     options.height = 900;

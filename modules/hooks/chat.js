@@ -217,7 +217,7 @@ export default function() {
 
       let link = game.i18n.format("CHAT.CommandLine.Help.Link", { link: "https://github.com/CatoThe1stElder/WFRP-4th-Edition-FoundryVTT/wiki" })
 
-      renderTemplate("systems/wfrp4e/templates/chat/help/chat-help-command.html", {
+      renderTemplate("systems/taa/templates/chat/help/chat-help-command.html", {
         commands: commandElements,
         link: link
       }).then(html => {
@@ -305,7 +305,7 @@ export default function() {
           let newQuantity = app.data.flags.postQuantity - 1
           let recreateData = app.data.flags.recreationData
           recreateData.postQuantity = newQuantity;
-          renderTemplate("systems/wfrp4e/templates/chat/post-item.html", recreateData).then(html => {
+          renderTemplate("systems/taa/templates/chat/post-item.html", recreateData).then(html => {
             app.update({ "flags.postQuantity": newQuantity, content : html })
             if (newQuantity <= 0)
               app.delete();
@@ -333,7 +333,7 @@ export default function() {
             ev.dataTransfer.setData("text/plain", app.data.flags.transfer);
             let recreateData = app.data.flags.recreationData
             recreateData.postQuantity = newQuantity;
-            renderTemplate("systems/wfrp4e/templates/chat/post-item.html", recreateData).then(html => {
+            renderTemplate("systems/taa/templates/chat/post-item.html", recreateData).then(html => {
 
               game.socket.emit("system.wfrp4e", {
                 type: "updateMsg",

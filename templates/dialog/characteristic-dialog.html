@@ -1,23 +1,12 @@
 <form class="characteristic-test">
-  {{> systems/wfrp4e/templates/dialog/dialog-constant.html}}
-
-  <div class="form-group">
-    <label title="Include a roll on the hit location table">{{localize "ROLL.HitLocation"}}
-      <input type="checkbox" name="hitLocation" data-dtype="Boolean" {{checked hitLocation}} />
-    </label>
-  </div>
-
+  {{> systems/taa/templates/dialog/dialog-constant.html}}
   <div class="roll-dialog-tag">characteristic</div>
 </form>
 
 <script>
   textContainer = document.querySelectorAll('.app.window-app.dialog');
-  length = textContainer.length;
-
+  length = textContainer.length
   
-  
-  
-
   for (i = 0; i < length; i++) {
     if (textContainer[i].children[1].children[0].children[0].className.includes("characteristic-test")) {
       new_red = textContainer[i].id;

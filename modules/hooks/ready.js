@@ -101,7 +101,7 @@ export default function() {
       let link = document.createElement('link');
       link.setAttribute('rel', 'stylesheet')
       link.type = 'text/css'
-      link.href = '/systems/wfrp4e/css/cursor.css'
+      link.href = '/systems/taa/css/cursor.css'
 
       document.head.appendChild(link);
     }
@@ -236,28 +236,6 @@ export default function() {
       if (permissions["FILES_BROWSE"].length < 4)
         permissions["FILES_BROWSE"] = [1, 2, 3, 4]
       game.settings.set("core", "permissions", permissions);
-    }
-
-    const NEEDS_MIGRATION_VERSION = "2.0.3";
-    let needMigration
-    try {
-      needMigration = !isNewerVersion(game.settings.get("wfrp4e", "systemMigrationVersion"), NEEDS_MIGRATION_VERSION)
-    }
-    catch
-    {
-      needMigration = true;
-    }
-    if (needMigration && game.user.isGM) {
-      new Dialog({
-        title: "A Glimmer of Hope",
-        content: `<p>Regarding the content wipe, I can't thank everyone enough for the emails sent to Cubicle 7. They are very supportive of implementing official modules for WFRP4e on Foundry. However, this will take time, so stay on the lookout! <br><br>Moo Man</p>`,
-        buttons: {
-          migrate: {
-            label: "Praise Sigmar",
-            callback: () => { game.settings.set("wfrp4e", "systemMigrationVersion", game.system.data.version) }
-          }
-        }
-      }).render(true)
     }
   })
 }

@@ -9,14 +9,14 @@ export default class NameGenWfrp {
     console.log("wfrp4e | Loading Names...")
 
     // Surname option 1
-    fetch("systems/wfrp4e/names/human_surnames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/human_surnames.txt").then(r => r.text()).then(async nameText => {
       this.surnames = []
       nameText.split("\n").forEach((nameGroup) => this.surnames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // Surname option 2 - prefix
-    fetch("systems/wfrp4e/names/human_surnames_prefix.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/human_surnames_prefix.txt").then(r => r.text()).then(async nameText => {
       this.surnamePrefixes = []
       nameText.split("\n").forEach((nameGroup) => this.surnamePrefixes.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -24,7 +24,7 @@ export default class NameGenWfrp {
     })
 
     // Surname option 2 - suffix
-    fetch("systems/wfrp4e/names/human_surnames_suffix.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/human_surnames_suffix.txt").then(r => r.text()).then(async nameText => {
       this.surnameSuffixes = []
       nameText.split("\n").forEach((nameGroup) => this.surnameSuffixes.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -32,7 +32,7 @@ export default class NameGenWfrp {
     })
 
     // Male forenames
-    fetch("systems/wfrp4e/names/male_human_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/male_human_forenames.txt").then(r => r.text()).then(async nameText => {
       this.human_male_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.human_male_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -40,7 +40,7 @@ export default class NameGenWfrp {
     })
 
     // Female forenames
-    fetch("systems/wfrp4e/names/female_human_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/female_human_forenames.txt").then(r => r.text()).then(async nameText => {
       this.human_female_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.human_female_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -49,7 +49,7 @@ export default class NameGenWfrp {
 
     // @@@@@@@@@@ DWARF @@@@@@@@@@@@@
     // male forenames
-    fetch("systems/wfrp4e/names/male_dwarf_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/male_dwarf_forenames.txt").then(r => r.text()).then(async nameText => {
       this.dwarf_male_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.dwarf_male_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -57,7 +57,7 @@ export default class NameGenWfrp {
     })
 
     // Female forenames
-    fetch("systems/wfrp4e/names/female_dwarf_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/female_dwarf_forenames.txt").then(r => r.text()).then(async nameText => {
       this.dwarf_female_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.dwarf_female_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -66,21 +66,21 @@ export default class NameGenWfrp {
 
     // @@@@@@@@@@ ELF @@@@@@@@@@@@@
     // elf forenames
-    fetch("systems/wfrp4e/names/elf_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/elf_forenames.txt").then(r => r.text()).then(async nameText => {
       this.elf_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.elf_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
 
-    fetch("systems/wfrp4e/names/elf_surnames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/elf_surnames.txt").then(r => r.text()).then(async nameText => {
       this.elf_surnames = []
       nameText.split("\n").forEach((nameGroup) => this.elf_surnames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // elf start
-    fetch("systems/wfrp4e/names/elf_start.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/elf_start.txt").then(r => r.text()).then(async nameText => {
       this.elf_start = []
       nameText.split("\n").forEach((nameGroup) => this.elf_start.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -88,7 +88,7 @@ export default class NameGenWfrp {
     })
 
     // elf connector
-    fetch("systems/wfrp4e/names/elf_connectors.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/elf_connectors.txt").then(r => r.text()).then(async nameText => {
       this.elf_connectors = []
       nameText.split("\n").forEach((nameGroup) => this.elf_connectors.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -96,7 +96,7 @@ export default class NameGenWfrp {
     })
 
     // female elf element
-    fetch("systems/wfrp4e/names/male_elf_element.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/male_elf_element.txt").then(r => r.text()).then(async nameText => {
       this.elf_male_element = []
       nameText.split("\n").forEach((nameGroup) => this.elf_male_element.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -104,21 +104,21 @@ export default class NameGenWfrp {
     })
 
     // male elf element
-    fetch("systems/wfrp4e/names/female_elf_element.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/female_elf_element.txt").then(r => r.text()).then(async nameText => {
       this.elf_female_element = []
       nameText.split("\n").forEach((nameGroup) => this.elf_female_element.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // wood elf end
-    fetch("systems/wfrp4e/names/elf_wood_end.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/elf_wood_end.txt").then(r => r.text()).then(async nameText => {
       this.elf_wood_end = []
       nameText.split("\n").forEach((nameGroup) => this.elf_wood_end.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // high elf end
-    fetch("systems/wfrp4e/names/elf_high_end.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/elf_high_end.txt").then(r => r.text()).then(async nameText => {
       this.elf_high_end = []
       nameText.split("\n").forEach((nameGroup) => this.elf_high_end.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -127,7 +127,7 @@ export default class NameGenWfrp {
 
     // @@@@@@@@@@ Halfling @@@@@@@@@@@@@
     // Halfling start
-    fetch("systems/wfrp4e/names/halfling_start.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/halfling_start.txt").then(r => r.text()).then(async nameText => {
       this.halfling_start = []
       nameText.split("\n").forEach((nameGroup) => this.halfling_start.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -135,28 +135,28 @@ export default class NameGenWfrp {
     })
 
     // Male ending
-    fetch("systems/wfrp4e/names/male_halfling_element.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/male_halfling_element.txt").then(r => r.text()).then(async nameText => {
       this.male_halfling_element = []
       nameText.split("\n").forEach((nameGroup) => this.male_halfling_element.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // Female ending
-    fetch("systems/wfrp4e/names/female_halfling_element.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/female_halfling_element.txt").then(r => r.text()).then(async nameText => {
       this.female_halfling_element = []
       nameText.split("\n").forEach((nameGroup) => this.female_halfling_element.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // Halfling surnames
-    fetch("systems/wfrp4e/names/halfling_surnames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/halfling_surnames.txt").then(r => r.text()).then(async nameText => {
       this.halfling_surnames = []
       nameText.split("\n").forEach((nameGroup) => this.halfling_surnames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // Halfling nicknames
-    fetch("systems/wfrp4e/names/halfling_nicknames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/taa/names/halfling_nicknames.txt").then(r => r.text()).then(async nameText => {
       this.halfling_nicknames = []
       nameText.split("\n").forEach((nameGroup) => this.halfling_nicknames.push(nameGroup.split(",").map(function (item) {
         return item.trim()

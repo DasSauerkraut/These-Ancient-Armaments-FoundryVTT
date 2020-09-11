@@ -48,7 +48,7 @@ export default function() {
         macro = await Macro.create({
           name: journal.data.name,
           type: "script",
-          img: "systems/wfrp4e/icons/buildings/scroll.png",
+          img: "systems/taa/icons/buildings/scroll.png",
           command: command
         }, { displaySheet: false })
         game.user.assignHotbarMacro(macro, slot);

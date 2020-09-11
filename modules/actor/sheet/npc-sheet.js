@@ -33,8 +33,8 @@ export default class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e
    */
   get template()
   {
-    if (!game.user.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.html";
-    return "systems/wfrp4e/templates/actors/npc-sheet.html";
+    if (!game.user.isGM && this.actor.limited) return "systems/taa/templates/actors/actor-limited.html";
+    return "systems/taa/templates/actors/npc-sheet.html";
   }
 
   /* -------------------------------------------- */

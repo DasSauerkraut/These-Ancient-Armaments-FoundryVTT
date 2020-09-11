@@ -7,7 +7,7 @@ export default function() {
    */
   Hooks.once("init", () => {
     // load tables from system folder
-    FilePicker.browse("data", "systems/wfrp4e/tables").then(resp => {
+    FilePicker.browse("data", "systems/taa/tables").then(resp => {
       try {
         if (resp.error)
           throw ""
@@ -382,28 +382,28 @@ export default function() {
 
     // Pre-load templates
     loadTemplates([
-      "systems/wfrp4e/templates/actors/actor-attributes.html",
-      "systems/wfrp4e/templates/actors/actor-abilities.html",
-      "systems/wfrp4e/templates/actors/actor-main.html",
-      "systems/wfrp4e/templates/actors/actor-combat.html",
-      "systems/wfrp4e/templates/actors/actor-biography.html",
-      "systems/wfrp4e/templates/actors/actor-inventory.html",
-      "systems/wfrp4e/templates/actors/actor-skills.html",
-      "systems/wfrp4e/templates/actors/actor-magic.html",
-      "systems/wfrp4e/templates/actors/actor-religion.html",
-      "systems/wfrp4e/templates/actors/actor-talents.html",
-      "systems/wfrp4e/templates/actors/actor-classes.html",
-      "systems/wfrp4e/templates/actors/actor-notes.html",
-      "systems/wfrp4e/templates/actors/npc-careers.html",
-      "systems/wfrp4e/templates/actors/npc-notes.html",
-      "systems/wfrp4e/templates/actors/creature-main.html",
-      "systems/wfrp4e/templates/actors/creature-notes.html",
-      "systems/wfrp4e/templates/actors/creature-main.html",
-      "systems/wfrp4e/templates/dialog/dialog-constant.html",
-      "systems/wfrp4e/templates/chat/roll/test-card.html",
-      "systems/wfrp4e/templates/chat/help/chat-command-display-info.html",
-      "systems/wfrp4e/templates/items/item-header.html",
-      "systems/wfrp4e/templates/items/item-description.html",
+      "systems/taa/templates/actors/actor-attributes.html",
+      "systems/taa/templates/actors/actor-abilities.html",
+      "systems/taa/templates/actors/actor-main.html",
+      "systems/taa/templates/actors/actor-combat.html",
+      "systems/taa/templates/actors/actor-biography.html",
+      "systems/taa/templates/actors/actor-inventory.html",
+      "systems/taa/templates/actors/actor-skills.html",
+      "systems/taa/templates/actors/actor-magic.html",
+      "systems/taa/templates/actors/actor-religion.html",
+      "systems/taa/templates/actors/actor-talents.html",
+      "systems/taa/templates/actors/actor-classes.html",
+      "systems/taa/templates/actors/actor-notes.html",
+      "systems/taa/templates/actors/npc-careers.html",
+      "systems/taa/templates/actors/npc-notes.html",
+      "systems/taa/templates/actors/creature-main.html",
+      "systems/taa/templates/actors/creature-notes.html",
+      "systems/taa/templates/actors/creature-main.html",
+      "systems/taa/templates/dialog/dialog-constant.html",
+      "systems/taa/templates/chat/roll/test-card.html",
+      "systems/taa/templates/chat/help/chat-command-display-info.html",
+      "systems/taa/templates/items/item-header.html",
+      "systems/taa/templates/items/item-description.html",
     ]);
 
     // Load name construction from files

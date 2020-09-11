@@ -81,7 +81,7 @@ export default class WFRP_Audio {
     try {
       let files = ""
       let file, group;
-      await FilePicker.browse("user", `systems/wfrp4e/sounds`).then(resp => {
+      await FilePicker.browse("user", `systems/taa/sounds`).then(resp => {
         files = resp.files
       })
       if (context.action == "hit")

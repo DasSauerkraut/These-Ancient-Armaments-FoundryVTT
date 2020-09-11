@@ -18,7 +18,7 @@ export default class GeneratorWfrp4e {
     if (!WFRP4E.species)
       return ui.notifications.error("No content found")
 
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/species-select.html", { species: WFRP4E.species }).then(html => {
+    renderTemplate("systems/taa/templates/chat/chargen/species-select.html", { species: WFRP4E.species }).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       ChatMessage.create(chatData);
     })
@@ -48,7 +48,7 @@ export default class GeneratorWfrp4e {
     let updateCardData = { roll: roll, species: WFRP4E.species }
 
     // Update the species selection menu to show what was rolled/chosen
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/species-select.html", updateCardData).then(html => {
+    renderTemplate("systems/taa/templates/chat/chargen/species-select.html", updateCardData).then(html => {
       speciesMessage.update({ content: html })
     })
     // Once a species is selected/rolled, display characteristics rolled
@@ -101,7 +101,7 @@ export default class GeneratorWfrp4e {
     cardData.extra = WFRP4E.speciesExtra[species]
     cardData.move = WFRP4E.speciesMovement[species]
 
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/attributes.html", cardData).then(html => {
+    renderTemplate("systems/taa/templates/chat/chargen/attributes.html", cardData).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       chatData["flags.transfer"] = JSON.stringify(dataTransfer);
       ChatMessage.create(chatData);
@@ -144,7 +144,7 @@ export default class GeneratorWfrp4e {
 
     cardData.speciesTalents = talents;
     cardData.choiceTalents = choiceTalents;
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/species-skills-talents.html", cardData).then(html => {
+    renderTemplate("systems/taa/templates/chat/chargen/species-skills-talents.html", cardData).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       ChatMessage.create(chatData);
     })
@@ -212,7 +212,7 @@ export default class GeneratorWfrp4e {
     }
 
     // Show card with instructions and button
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/career-select.html", cardData).then(html => {
+    renderTemplate("systems/taa/templates/chat/chargen/career-select.html", cardData).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       ChatMessage.create(chatData);
     })
@@ -262,7 +262,7 @@ export default class GeneratorWfrp4e {
       height: `${hFeet}'${hInches}`
     }
 
-    renderTemplate(`systems/wfrp4e/templates/chat/chargen/details.html`, cardData).then(html => {
+    renderTemplate(`systems/taa/templates/chat/chargen/details.html`, cardData).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       chatData["flags.transfer"] = JSON.stringify(dataTransfer);
       ChatMessage.create(chatData);

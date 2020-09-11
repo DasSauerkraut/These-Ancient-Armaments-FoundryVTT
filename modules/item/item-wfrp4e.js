@@ -15,7 +15,7 @@ export default class ItemWfrp4e extends Item {
   // Upon creation, assign a blank image if item is new (not duplicated) instead of mystery-man default
   static async create(data, options) {
     if (!data.img)
-      data.img = "systems/wfrp4e/icons/blank.png";
+      data.img = "systems/taa/icons/blank.png";
     super.create(data, options);
   }
 
@@ -329,7 +329,7 @@ export default class ItemWfrp4e extends Item {
     if (chatData.img.includes("/blank.png"))
       chatData.img = null;
 
-    renderTemplate('systems/wfrp4e/templates/chat/post-item.html', chatData).then(html => {
+    renderTemplate('systems/taa/templates/chat/post-item.html', chatData).then(html => {
       let chatOptions = WFRP_Utility.chatDataSetup(html)
 
       // Setup drag and drop data

@@ -5,7 +5,7 @@ export default class StatBlockParser extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = "stat-parser";
-        options.template = "systems/wfrp4e/templates/apps/stat-parser.html";
+        options.template = "systems/taa/templates/apps/stat-parser.html";
         options.height = 600;
         options.width = 600;
         options.minimizable = true;
@@ -208,7 +208,7 @@ export default class StatBlockParser extends FormApplication {
 
             let trappingItem = await WFRP_Utility.findItem(trapping, "trapping")
             if (!trappingItem) {
-                trappingItem = new ItemWfrp4e({ img: "systems/wfrp4e/icons/blank.png", name: trapping, type: "trapping", data: game.system.model.Item.trapping })
+                trappingItem = new ItemWfrp4e({ img: "systems/taa/icons/blank.png", name: trapping, type: "trapping", data: game.system.model.Item.trapping })
                 trappingItem.data.data.trappingType.value = "misc"
             }
             trappings.push(trappingItem)

@@ -74,32 +74,6 @@
         <h4 id="movement-label">{{localize "Movement"}}</h4>
       </div>
     </div>
-    <div class="move-section">
-      <div class="move-value">
-        {{#if actor.flags.autoCalcWalk}}
-        <a class="auto-calc-toggle" toggle-type="walk">{{actor.data.details.move.walk}} {{localize "yds"}}</a>
-        {{else}}
-        <input class="auto-calc-toggle" toggle-type="walk" name="data.details.move.walk" type="text"
-          value="{{data.details.move.walk}}" data-dtype="String">
-        {{/if}}
-      </div>
-      <div class="move-name">
-        <h4 id="walk-label">{{localize "Walk"}}</h4>
-      </div>
-    </div>
-    <div class="move-section">
-      <div class="move-value">
-        {{#if actor.flags.autoCalcRun}}
-        <a class="auto-calc-toggle" toggle-type="run">{{actor.data.details.move.run}} {{localize "yds"}}</a>
-        {{else}}
-        <input class="auto-calc-toggle" toggle-type="run" name="data.details.move.run" type="text"
-          value="{{data.details.move.run}}" data-dtype="String">
-        {{/if}}
-      </div>
-      <div class="move-name">
-        <h4 id="run-label">{{localize "Run"}}</h4>
-      </div>
-    </div>
   </div>
 
   <div class="fate-resilience row-section">
@@ -115,21 +89,29 @@
         <a class = "metacurrency-value" data-point-type="fate">{{data.status.fate.value}}</a>
       </div>
     </div>
-    <div class="fate-resilience-section">
-      <span class="top label">{{localize "Resolve"}}</span>
-      <span class="bottom label">{{localize "Resilience"}}</span>
-    </div>
-    <div class="fate-resilience-section values">
-      <div class="top value">
-        <a class = "metacurrency-value" data-point-type="resolve">{{data.status.resolve.value}}</a>
-      </div>
-      <div class="bottom value">
-        <a class = "metacurrency-value" data-point-type="resilience">{{data.status.resilience.value}}</a>
-      </div>
-    </div>
   </div>
 
   <div class="wounds row-section">
+    <div class="wounds-section">
+      <span class="top label">Temp. HP L</span> 
+      <div class="wounds-value-box">
+        <div id="value">
+          <input class="wounds-value" data-dtype="{{data.status.thp.type}}" type="text" value="{{data.status.thp.value}}">
+        </div>
+        <div id="divisor">
+          /
+        </div>
+        <div id="wounds-max">
+          {{#if actor.flags.autoCalcWounds}}
+          <a class="auto-calc-toggle" toggle-type="wounds">{{data.status.thp.max}}</a>
+          {{else}}
+          <input class="auto-calc-toggle" toggle-type="wounds" name="data.status.thp.max" type="text"
+            value="{{data.status.thp.max}}" data-dtype="{{data.status.thp.type}}">
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
     <div class="wounds-section">
       <span class="top label">{{localize "Wounds"}}<a class = "rest-icon" title="{{localize "RestRecover"}}"><i class="fas fa-bed"></i></a> </span> 
       <div class="wounds-value-box">
@@ -149,9 +131,20 @@
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="wounds-section">
+      <span class="top label">Bloodied L</span> 
+      <div class="wounds-value-box">
+        <div id="bloodied">
+          <span class="auto-calc-toggle" >{{data.status.bloodied.value}}</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
 </div>
 
+<div class="main-row second">
   <div class="experience row-section">
     <div class="experience-section">
       <span class="top label">{{localize "Experience"}}</span>

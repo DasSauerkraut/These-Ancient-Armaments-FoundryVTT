@@ -141,7 +141,6 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         // Setup advancement indicators for characteristics
         let availableCharacteristics = career.data.characteristics
         for (let char in actorData.data.characteristics) {
-          if (availableCharacteristics.includes(char))
             actorData.data.characteristics[char].career = true;
         }
 
@@ -256,7 +255,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         this.actor.castTest(setupData)
       });
     else {
-      renderTemplate("systems/wfrp4e/templates/dialog/cast-channel-dialog.html").then(dlg => {
+      renderTemplate("systems/taa/templates/dialog/cast-channel-dialog.html").then(dlg => {
         new Dialog({
           title: game.i18n.localize("ACTOR.CastOrChannel"),
           content: dlg,
@@ -582,7 +581,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
           this.actor.basicTest(setupData)
         });
       else
-        this.actor.setupCharacteristic("ag").then(setupData => {
+        this.actor.setupCharacteristic("agi").then(setupData => {
           this.actor.basicTest(setupData)
         });
     })
@@ -898,20 +897,8 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       if (event.button == 2) {
         let newFlags = duplicate(this.actor.data.flags);
 
-        if (toggle == "walk")
-          newFlags.autoCalcWalk = !newFlags.autoCalcWalk;
-
-        else if (toggle == "run")
-          newFlags.autoCalcRun = !newFlags.autoCalcRun;
-
-        else if (toggle == "wounds")
+        if (toggle == "wounds")
           newFlags.autoCalcWounds = !newFlags.autoCalcWounds;
-
-        else if (toggle == "critW")
-          newFlags.autoCalcCritW = !newFlags.autoCalcCritW;
-
-        else if (toggle == "corruption")
-          newFlags.autoCalcCorruption = !newFlags.autoCalcCorruption;
 
         else if (toggle == "encumbrance")
           newFlags.autoCalcEnc = !newFlags.autoCalcEnc;
@@ -981,11 +968,11 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       let li = $(ev.currentTarget).parents(".item"),
         itemId = li.attr("data-item-id");
       if (this.actor.getEmbeddedEntity("OwnedItem", itemId).name == "Boo") {
-        AudioHelper.play({ src: "systems/wfrp4e/sounds/squeek.wav" }, false)
+        AudioHelper.play({ src: "systems/taa/sounds/squeek.wav" }, false)
         return // :^)
       }
 
-      renderTemplate('systems/wfrp4e/templates/dialog/delete-item-dialog.html').then(html => {
+      renderTemplate('systems/taa/templates/dialog/delete-item-dialog.html').then(html => {
         new Dialog({
           title: "Delete Confirmation",
           content: html,
@@ -1042,7 +1029,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         if (game.settings.get("wfrp4e", "limitEquippedWeapons"))
           if (this.actor.data.flags.eqpPoints + newEqpPoints > 2 && equippedState)
           {
-            AudioHelper.play({ src: "systems/wfrp4e/sounds/no.wav" }, false)
+            AudioHelper.play({ src: "systems/taa/sounds/no.wav" }, false)
             return ui.notifications.error(game.i18n.localize("Error.LimitedWeapons"))
           }
 
@@ -1796,7 +1783,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
           });
       }
     }
-    data["img"] = "systems/wfrp4e/icons/blank.png";
+    data["img"] = "systems/taa/icons/blank.png";
     data["name"] = `New ${data.type.capitalize()}`;
     this.actor.createEmbeddedEntity("OwnedItem", data);
   }

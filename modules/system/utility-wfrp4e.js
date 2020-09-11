@@ -371,7 +371,7 @@ export default class WFRP_Utility {
     };
     if (["gmroll", "blindroll"].includes(chatOptions.rollMode)) chatOptions["whisper"] = ChatMessage.getWhisperIDs("GM");
     if (chatOptions.rollMode === "blindroll") chatOptions["blind"] = true;
-    chatOptions["template"] = "systems/wfrp4e/templates/chat/combat-status.html"
+    chatOptions["template"] = "systems/taa/templates/chat/combat-status.html"
 
 
     let chatData = {
@@ -417,7 +417,7 @@ export default class WFRP_Utility {
     };
     if (["gmroll", "blindroll"].includes(chatOptions.rollMode)) chatOptions["whisper"] = ChatMessage.getWhisperIDs("GM");
     if (chatOptions.rollMode === "blindroll") chatOptions["blind"] = true;
-    chatOptions["template"] = "systems/wfrp4e/templates/chat/round-summary.html"
+    chatOptions["template"] = "systems/taa/templates/chat/round-summary.html"
 
 
     let chatData = {
@@ -696,7 +696,7 @@ export default class WFRP_Utility {
       case "Credit":
         return `<a class = "credit-link" data-credit="${id}"><i class="fas fa-coins"></i> ${name ? name : id}</a>`
       case "Corruption":
-        return `<a class = "corruption-link" data-strength="${id}"><img src="systems/wfrp4e/ui/chaos.svg" height=15px width=15px style="border:none"> ${name ? name : id}</a>`
+        return `<a class = "corruption-link" data-strength="${id}"><img src="systems/taa/ui/chaos.svg" height=15px width=15px style="border:none"> ${name ? name : id}</a>`
     }
   }
 
@@ -738,7 +738,7 @@ export default class WFRP_Utility {
 
     // If right click, open table modifier menu
     else if (event.button == 2) {
-      renderTemplate('systems/wfrp4e/templates/dialog/table-dialog.html').then(html => {
+      renderTemplate('systems/taa/templates/dialog/table-dialog.html').then(html => {
         new Dialog(
           {
             title: "Table Modifier",
@@ -844,7 +844,7 @@ export default class WFRP_Utility {
 
   static postCorruptionTest(strength)
   {
-    renderTemplate("systems/wfrp4e/templates/chat/corruption.html", { strength }).then(html => {
+    renderTemplate("systems/taa/templates/chat/corruption.html", { strength }).then(html => {
       ChatMessage.create({ content: html });
     })
   }

@@ -33,19 +33,6 @@
           <span class="label-details">{{localize "Class"}}</span>
         </div>
 
-        <div id="field-career" class="item">
-          <input class="input-details" style="box-shadow: none !important;" type="text" value="{{actor.currentCareerGroup}}"
-            placeholder="{{localize 'Career'}}" readonly title = "{{localize 'SHEET.CareerToolTip'}}"/>
-          <span class="label-details">{{localize "Career Group"}}</span>
-        </div>
-
-        <div id="field-careerlevel" class="item">
-          <input class="input-details"  style="box-shadow: none !important;" type="text" value="{{actor.currentCareer}}"
-            placeholder="{{localize 'Career Level'}}" readonly title = "{{localize 'SHEET.CareerToolTip'}}" />
-          <span class="label-details">{{localize "Career"}}</span>
-        </div>
-      </div>
-
       <div class="row">
         <div id="field-status" class="item">
           <input id="input-status" class="input-details" style="box-shadow: none !important;" type="text" value="{{actor.data.details.status.value}}"
@@ -119,28 +106,28 @@
 
       <section class="content">
         <div class="tab main save-scroll" data-tab="main" >
-          {{> systems/wfrp4e/templates/actors/actor-main.html}}
+          {{> systems/taa/templates/actors/actor-main.html}}
         </div>
         <div class="tab skills save-scroll" data-tab="skills" >
-          {{> systems/wfrp4e/templates/actors/actor-skills.html}}
+          {{> systems/taa/templates/actors/actor-skills.html}}
         </div>
         <div class="tab talents save-scroll" data-tab="talents" >
-          {{> systems/wfrp4e/templates/actors/actor-talents.html}}
+          {{> systems/taa/templates/actors/actor-talents.html}}
         </div>
         <div class="tab combat save-scroll" data-tab="combat" >
-          {{> systems/wfrp4e/templates/actors/actor-combat.html}}
+          {{> systems/taa/templates/actors/actor-combat.html}}
         </div>
         <div class="tab magic save-scroll" data-tab="magic" >
-          {{> systems/wfrp4e/templates/actors/actor-magic.html}}
+          {{> systems/taa/templates/actors/actor-magic.html}}
         </div>
         <div class="tab religion save-scroll" data-tab="religion" >
-          {{> systems/wfrp4e/templates/actors/actor-religion.html}}
+          {{> systems/taa/templates/actors/actor-religion.html}}
         </div>
         <div class="tab inventory save-scroll" data-tab="inventory" >
-          {{> systems/wfrp4e/templates/actors/actor-inventory.html}}
+          {{> systems/taa/templates/actors/actor-inventory.html}}
         </div>
         <div class="tab notes save-scroll" data-tab="notes" >
-          {{> systems/wfrp4e/templates/actors/actor-notes.html}}
+          {{> systems/taa/templates/actors/actor-notes.html}}
         </div>
     </section>
   </section>
